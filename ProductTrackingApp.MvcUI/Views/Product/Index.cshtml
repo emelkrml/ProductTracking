@@ -1,0 +1,99 @@
+﻿@model ProductTrackingApp.MvcUI.Models.ProductViewModel
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Ürün Listesi</h1>
+    <a href="/Product/AddProduct" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Ürün Ekle</a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Birim Fiyatı</th>
+                        <th>Stoktaki Miktarı</th>
+                        <th>Birim Başına Miktar</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Birim Fiyatı</th>
+                        <th>Stoktaki Miktarı</th>
+                        <th>Birim Başına Miktar</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.ProductName</td>
+                            <td>@product.CategoryId</td>
+                            <td>@product.UnitPrice</td>
+                            <td>@product.UnitsInStock</td>
+                            <td>@product.QuantityPerUnit</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("UpdateProduct", new { productId = product.ProductId })" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                    </a>
+                                    <a href="@Url.Action("DeleteProduct", new { productId = product.ProductId })" class="btn btn-danger btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@*<table>
+        <tr>
+            <td>Ürün Adı</td>
+            <td>Birim fiyatı</td>
+            <td>İşlemler</td>
+        </tr>
+
+
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.UnitPrice</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@Url.Action("UpdateProduct", new { productId = product.ProductId })" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
+                        <a href="@Url.Action("DeleteProduct", new { productId = product.ProductId })" class="btn btn-danger"><span class="fa fa-trash-o"></span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>*@
+@*<div class="page">
+        @Html.Pager(Model.PagingInfo)
+    </div>*@
